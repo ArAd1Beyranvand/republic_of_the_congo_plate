@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/widgets.dart';
 import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:plate_core/plate_core.dart';
@@ -24,7 +26,8 @@ abstract final class _Layout {
   static const double rcGlyph = 59;
 }
 
-/// The regular plate, `123 AB 4`. Groups `number`, `series`, `area`.
+/// The regular plate, `123 AB 4`; the area code is one or two digits (1–14)
+/// in one field centred on the measured one-digit position. Groups `number`, `series`, `area`.
 ///
 /// Not implemented: the diplomatic plate (orange on green, `123 CD 45`) and the
 /// temporary-import plate (black on green, `123 AB 4 IT`), which the article
@@ -33,13 +36,9 @@ abstract final class _Layout {
 /// the reference photo (no vector is on Commons), masked to a disc. The
 /// article names nothing Israel-specific.
 abstract final class RepublicOfTheCongoPlates {
-  /// One-digit area code (1–9).
-  static final PlateSpec private = _spec('cg.private', 1);
+  static final PlateSpec private = _spec();
 
-  /// Two-digit area code (10–14).
-  static final PlateSpec privateTwoDigitArea = _spec('cg.private2', 2);
-
-  static List<PlateSpec> get all => <PlateSpec>[private, privateTwoDigitArea];
+  static List<PlateSpec> get all => <PlateSpec>[private];
 
   static const PlateDecal _emblem = PlateDecal(
     image: AssetImage(
@@ -49,55 +48,61 @@ abstract final class RepublicOfTheCongoPlates {
     box: _Layout.emblem,
   );
 
-  static List<PlateSlot> _run(
+  /// A field of up to [length] characters on [cx], [pitch] apart. A fixed
+  /// field is spaced to the printed pitch; a variable one is centred on [cx].
+  static PlateSlot _field(
     PlateAlphabet alphabet,
-    int count,
+    int length,
     double cx,
-    double pitch,
-  ) => plateRegister(
+    double pitch, {
+    int? minLength,
+  }) => PlateSlot(
     alphabet: alphabet,
-    count: count,
-    left: cx - pitch / 2,
-    top: _Layout.cy - _Layout.box / 2,
-    width: pitch,
-    height: _Layout.box,
+    box: PlateBox(
+      cx - length * pitch / 2,
+      _Layout.cy - _Layout.box / 2,
+      length * pitch,
+      _Layout.box,
+    ),
+    length: length,
+    minLength: minLength,
+    spacing: minLength == null ? max(0, pitch - 0.6 * 0.72 * _Layout.box) : 0,
   );
 
-  static PlateSpec _spec(String id, int areaDigits) {
+  static PlateSpec _spec() {
     final List<PlateSlot> slots = <PlateSlot>[
-      ..._run(
+      _field(
         RepublicOfTheCongoAlphabets.digits,
         3,
-        _Layout.numberCx,
+        _Layout.numberCx + _Layout.numberPitch,
         _Layout.numberPitch,
       ),
-      ..._run(
+      _field(
         RepublicOfTheCongoAlphabets.letters,
         2,
-        _Layout.seriesCx,
+        _Layout.seriesCx + _Layout.seriesPitch / 2,
         _Layout.seriesPitch,
       ),
-      ..._run(
+      _field(
         RepublicOfTheCongoAlphabets.digits,
-        areaDigits,
+        2,
         _Layout.areaCx,
         _Layout.areaPitch,
+        minLength: 1,
       ),
     ];
     return PlateSpec(
-      id: id,
+      id: 'cg.private',
       country: RepublicOfTheCongoCountry.republic_of_the_congo,
       canvasWidth: _Layout.width,
       canvasHeight: _Layout.height,
       panel: const PlatePanel(box: PlateBox(0, 0, 0, 0)),
       noPanel: true,
       slots: slots,
-      textGroups: <PlateTextGroup>[
-        PlateTextGroup(const <int>[0, 1, 2], key: 'number'),
-        PlateTextGroup(const <int>[3, 4], key: 'series'),
-        PlateTextGroup(<int>[
-          for (int i = 0; i < areaDigits; i++) 5 + i,
-        ], key: 'area'),
+      textGroups: const <PlateTextGroup>[
+        PlateTextGroup(<int>[0], key: 'number'),
+        PlateTextGroup(<int>[1], key: 'series'),
+        PlateTextGroup(<int>[2], key: 'area'),
       ],
       decals: const <PlateDecal>[_emblem],
       labels: const <PlateLabel>[

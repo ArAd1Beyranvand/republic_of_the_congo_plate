@@ -29,12 +29,12 @@ void main() {
         'private': (
           RepublicOfTheCongoPlates.private,
           RepublicOfTheCongoThemes.private,
-          '2 2 9 E A 2',
+          '229 EA 2',
         ),
         'private_two_digit_area': (
-          RepublicOfTheCongoPlates.privateTwoDigitArea,
+          RepublicOfTheCongoPlates.private,
           RepublicOfTheCongoThemes.private,
-          '2 2 9 E A 1 2',
+          '229 EA 12',
         ),
       };
 
@@ -66,6 +66,9 @@ void main() {
           ),
         ),
       );
+      await tester.runAsync(
+        () => Future<void>.delayed(const Duration(milliseconds: 300)),
+      );
       await tester.pumpAndSettle();
       await expectLater(
         find.byType(PlateView),
@@ -75,4 +78,16 @@ void main() {
       controller.dispose();
     });
   }
+
+  test('the area is one field of one or two digits', () {
+    final PlateSpec spec = RepublicOfTheCongoPlates.private;
+    expect(spec.slots.map((PlateSlot s) => s.length), <int>[3, 2, 2]);
+    expect(spec.slots.map((PlateSlot s) => s.minLength), <int>[3, 2, 1]);
+    PlateController c = PlateController.fromValues(spec, ['229', 'EA', '2']);
+    expect(c.isCompleted, isTrue);
+    c.dispose();
+    c = PlateController.fromValues(spec, ['229', 'EA', null]);
+    expect(c.isCompleted, isFalse);
+    c.dispose();
+  });
 }
