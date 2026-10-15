@@ -5,6 +5,7 @@ import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:plate_core/plate_core.dart';
 
 import 'republic_of_the_congo_country.dart';
+import 'republic_of_the_congo_regions.dart';
 
 /// Where the ink sits, in plate units (520×110 mm, the article's size).
 ///
@@ -104,6 +105,7 @@ abstract final class RepublicOfTheCongoPlates {
         PlateTextGroup(<int>[1], key: 'series'),
         PlateTextGroup(<int>[2], key: 'area'),
       ],
+      resolveRegion: RepublicOfTheCongoRegions.captionOf,
       decals: const <PlateDecal>[_emblem],
       labels: const <PlateLabel>[
         PlateLabel(text: 'RC', box: _Layout.rc, glyphHeight: _Layout.rcGlyph),
