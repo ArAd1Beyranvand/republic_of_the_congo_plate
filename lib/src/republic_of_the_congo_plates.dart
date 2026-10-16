@@ -7,9 +7,7 @@ import 'package:plate_core/plate_core.dart';
 import 'republic_of_the_congo_country.dart';
 import 'republic_of_the_congo_regions.dart';
 
-/// Where the ink sits, in plate units (520×110 mm, the article's size).
-///
-/// Measured off the flattened photo `____1` (4 px per unit): digit ink y
+/// Plate units (520×110 mm) measured off the flattened photo `____1` (4 px per unit): digit ink y
 /// 16–97.5 (cy 56.8, 81 tall); digit cells centred 117.5, 163.6, 209.7
 /// (pitch 46.1); letters E, A centred 292, 339 (pitch 47); the area digit
 /// centred 410.8. The ink would need a ~147-unit box on a 110 plate, so the
@@ -28,14 +26,13 @@ abstract final class _Layout {
 }
 
 /// The regular plate, `123 AB 4`; the area code is one or two digits (1–14)
-/// in one field centred on the measured one-digit position. Groups `number`, `series`, `area`.
+/// /// in one field centred on the measured one-digit position. Groups `number`,
+/// `series`, `area`.
 ///
-/// Not implemented: the diplomatic plate (orange on green, `123 CD 45`) and the
-/// temporary-import plate (black on green, `123 AB 4 IT`), which the article
-/// describes but pictures nowhere, so no reference was measured; the
+/// Not implemented, for lack of a measured reference: the diplomatic plate
+/// (orange on green) and the temporary-import plate (black on green). The
 /// hologram sticker at x 487–508 is not drawn. The CEMAC emblem is a crop of
-/// the reference photo (no vector is on Commons), masked to a disc. The
-/// article names nothing Israel-specific.
+/// the reference photo (no vector is on Commons), masked to a disc.
 abstract final class RepublicOfTheCongoPlates {
   static final PlateSpec private = _spec();
 

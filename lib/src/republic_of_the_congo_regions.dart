@@ -1,5 +1,3 @@
-import 'package:plate_core/plate_core.dart';
-
 /// Locates a Congolese plate from its area code (the last one or two digits).
 ///
 /// Source: the "Regular license plates" section of
@@ -22,11 +20,10 @@ abstract final class RepublicOfTheCongoRegions {
     '14': 'Plateau',
   };
 
-  /// The area of [code], or null when empty or unissued. `1` is a complete
-  /// code, so it names Nkayi until a second digit makes it 10–14.
+  /// `1` is a complete code, so it names Nkayi until a second digit makes it
+  /// 10–14.
   static String? lookup(String code) => _areas[code];
 
-  /// A [PlateLabelResolver] for [PlateSpec.resolveRegion].
   static String? captionOf(String Function(String key) group) =>
       lookup(group('area'));
 }
