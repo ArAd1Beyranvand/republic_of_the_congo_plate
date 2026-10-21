@@ -7,12 +7,9 @@ import 'package:plate_core/plate_core.dart';
 import 'republic_of_the_congo_country.dart';
 import 'republic_of_the_congo_regions.dart';
 
-/// Plate units (520×110 mm) measured off the flattened photo `____1` (4 px per unit): digit ink y
-/// 16–97.5 (cy 56.8, 81 tall); digit cells centred 117.5, 163.6, 209.7
-/// (pitch 46.1); letters E, A centred 292, 339 (pitch 47); the area digit
-/// centred 410.8. The ink would need a ~147-unit box on a 110 plate, so the
-/// box is 100 and the ink lands near 60% of the photo's. The CEMAC emblem is
-/// x 27–75.5, y 12.5–60 and "RC" is centred x 48, ink y 69–101 (32 tall).
+/// Plate units (520×110) measured off the reference photo at 4 px per unit.
+/// The ink would need a ~147-unit box on a 110 plate, so the box is 100 and
+/// the ink lands near 60% of the photo's.
 abstract final class _Layout {
   static const double width = 520, height = 110;
   static const double cy = 56.8, box = 100;
@@ -26,13 +23,12 @@ abstract final class _Layout {
 }
 
 /// The regular plate, `123 AB 4`; the area code is one or two digits (1–14)
-/// /// in one field centred on the measured one-digit position. Groups `number`,
+/// in one field centred on the measured one-digit position. Groups `number`,
 /// `series`, `area`.
 ///
-/// Not implemented, for lack of a measured reference: the diplomatic plate
-/// (orange on green) and the temporary-import plate (black on green). The
-/// hologram sticker at x 487–508 is not drawn. The CEMAC emblem is a crop of
-/// the reference photo (no vector is on Commons), masked to a disc.
+/// Not implemented, for lack of a measured reference: the diplomatic and
+/// temporary-import plates and the hologram sticker. The CEMAC emblem is a
+/// crop of the reference photo, masked to a disc.
 abstract final class RepublicOfTheCongoPlates {
   static final PlateSpec private = _spec();
 
