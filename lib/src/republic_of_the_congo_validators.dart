@@ -5,6 +5,8 @@ import 'package:plate_core/plate_core.dart';
 class RepublicOfTheCongoValidator extends GatedPlateValidator {
   const RepublicOfTheCongoValidator();
 
+  static final RegExp _series = RegExp(r'^[A-Z]{2}$');
+
   @override
   String get gateGroup => 'area';
 
@@ -13,7 +15,7 @@ class RepublicOfTheCongoValidator extends GatedPlateValidator {
     if (!isDigitsOfLength(entry.group('number'), 3)) {
       return const PlateValidation.invalid('The number is 3 digits.');
     }
-    if (!RegExp(r'^[A-Z]{2}$').hasMatch(entry.group('series'))) {
+    if (!_series.hasMatch(entry.group('series'))) {
       return const PlateValidation.invalid('The series is 2 letters.');
     }
     final int? area = int.tryParse(entry.group('area'));
