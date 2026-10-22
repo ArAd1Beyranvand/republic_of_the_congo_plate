@@ -24,6 +24,5 @@ abstract final class RepublicOfTheCongoRegions {
   /// 10–14.
   static String? lookup(String code) => _areas[code];
 
-  static String? captionOf(String Function(String key) group) =>
-      lookup(group('area'));
+  static String? captionOf(String Function(String key) group) => lookup(group('area'));
 }
