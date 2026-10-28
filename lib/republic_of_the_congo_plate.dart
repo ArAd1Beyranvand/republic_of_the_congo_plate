@@ -4,7 +4,8 @@
 /// advisory validator.
 library;
 
-export 'package:plate_alphabet/plate_alphabet.dart' show RepublicOfTheCongoAlphabets;
+export 'package:plate_alphabet/plate_alphabet.dart'
+    show RepublicOfTheCongoAlphabets;
 
 export 'src/republic_of_the_congo_colors.dart';
 export 'src/republic_of_the_congo_country.dart';

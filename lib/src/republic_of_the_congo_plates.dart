@@ -35,7 +35,10 @@ abstract final class RepublicOfTheCongoPlates {
   static List<PlateSpec> get all => <PlateSpec>[private];
 
   static const PlateDecal _emblem = PlateDecal(
-    image: AssetImage('assets/icons/cemac_emblem.png', package: 'republic_of_the_congo_plate'),
+    image: AssetImage(
+      'assets/icons/cemac_emblem.png',
+      package: 'republic_of_the_congo_plate',
+    ),
     box: _Layout.emblem,
   );
 

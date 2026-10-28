@@ -4,7 +4,10 @@ import 'package:republic_of_the_congo_plate/republic_of_the_congo_plate.dart';
 
 void main() {
   test('one- and two-digit area codes', () {
-    expect(RepublicOfTheCongoRegions.lookup('4'), 'Capital District (Brazzaville)');
+    expect(
+      RepublicOfTheCongoRegions.lookup('4'),
+      'Capital District (Brazzaville)',
+    );
     expect(RepublicOfTheCongoRegions.lookup('1'), 'Nkayi');
     expect(RepublicOfTheCongoRegions.lookup('10'), 'Loubomo');
     expect(RepublicOfTheCongoRegions.lookup('14'), 'Plateau');
@@ -17,7 +20,9 @@ void main() {
   });
 
   test('the controller follows each digit typed and deleted', () {
-    final PlateController c = PlateController(spec: RepublicOfTheCongoPlates.private);
+    final PlateController c = PlateController(
+      spec: RepublicOfTheCongoPlates.private,
+    );
     expect(c.regionCaption, isNull);
     c.setGroup('area', '1');
     expect(c.regionCaption, 'Nkayi');
