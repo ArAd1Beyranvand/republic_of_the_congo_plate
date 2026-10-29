@@ -35,6 +35,9 @@ abstract final class RepublicOfTheCongoPlates {
   static List<PlateSpec> get all => <PlateSpec>[private];
 
   static const PlateDecal _emblem = PlateDecal(
+    // TODO(py): [H2][D6] ImageProvider: reference the raster as package + path; importlib.resources.
+    // TODO(ts): [H2][D6] ImageProvider: reference the raster as package + path; import as asset URL.
+    // TODO(kt): [H2][D6] ImageProvider: reference the raster as package + path; Res/compose resources.
     image: AssetImage(
       'assets/icons/cemac_emblem.png',
       package: 'republic_of_the_congo_plate',
