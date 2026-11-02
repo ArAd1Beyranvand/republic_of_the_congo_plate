@@ -1,7 +1,7 @@
 name: republic_of_the_congo_plate
 description: "Republic of the Congo's licence plates for the plate_core library — the regular black-on-white plate with the CEMAC emblem, one theme, Latin alphabets and an advisory validator."
 version: 0.1.0
-repository: https://github.com/ArAd1Beyranvand/republic_of_the_congo_plate
+repository: https://github.com/ArAd1Beyranvand/republic_of_the_congo_plate/tree/main/flutter
 resolution: workspace
 
 environment:
