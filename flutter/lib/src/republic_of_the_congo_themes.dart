@@ -8,7 +8,6 @@ abstract final class RepublicOfTheCongoThemes {
   static const PlateTheme private = PlateTheme.monochrome(
     field: RepublicOfTheCongoColors.white,
     ink: RepublicOfTheCongoColors.black,
-    inactive: RepublicOfTheCongoColors.inactive,
     borderWidthRatio: 0.04,
     plateRadiusRatio: 0.06,
   );

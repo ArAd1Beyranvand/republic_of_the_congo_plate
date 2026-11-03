@@ -8,7 +8,6 @@ abstract final class RepublicOfTheCongoCountry {
   // ignore: constant_identifier_names
   static const PlateCountry republic_of_the_congo = PlateCountry(
     code: 'cg',
-    captionLines: <String>[],
     panelColor: RepublicOfTheCongoColors.white,
     panelTextColor: RepublicOfTheCongoColors.black,
   );

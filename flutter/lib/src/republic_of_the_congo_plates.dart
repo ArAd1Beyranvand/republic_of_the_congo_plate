@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/widgets.dart';
 import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:plate_core/plate_core.dart';
@@ -11,8 +9,7 @@ import 'republic_of_the_congo_regions.dart';
 /// The ink would need a ~147-unit box on a 110 plate, so the box is 100 and
 /// the ink lands near 60% of the photo's.
 abstract final class _Layout {
-  static const double width = 520, height = 110;
-  static const double cy = 56.8, box = 100;
+  static const double width = 520, height = 110, cy = 56.8, box = 100;
   static const double numberCx = 117.5, numberPitch = 46.1;
   static const double seriesCx = 292, seriesPitch = 47;
   static const double areaCx = 410.8, areaPitch = 46;
@@ -35,9 +32,6 @@ abstract final class RepublicOfTheCongoPlates {
   static List<PlateSpec> get all => <PlateSpec>[private];
 
   static const PlateDecal _emblem = PlateDecal(
-    // TODO(py): [H2][D6] ImageProvider: reference the raster as package + path; importlib.resources.
-    // TODO(ts): [H2][D6] ImageProvider: reference the raster as package + path; import as asset URL.
-    // TODO(kt): [H2][D6] ImageProvider: reference the raster as package + path; Res/compose resources.
     image: AssetImage(
       'assets/icons/cemac_emblem.png',
       package: 'republic_of_the_congo_plate',
@@ -63,7 +57,7 @@ abstract final class RepublicOfTheCongoPlates {
     ),
     length: length,
     minLength: minLength,
-    spacing: minLength == null ? max(0, pitch - 0.6 * 0.72 * _Layout.box) : 0,
+    spacing: minLength == null ? plateRunSpacing(pitch, _Layout.box) : 0,
   );
 
   static PlateSpec _spec() {
@@ -93,14 +87,8 @@ abstract final class RepublicOfTheCongoPlates {
       country: RepublicOfTheCongoCountry.republic_of_the_congo,
       canvasWidth: _Layout.width,
       canvasHeight: _Layout.height,
-      panel: const PlatePanel(box: PlateBox(0, 0, 0, 0)),
-      noPanel: true,
       slots: slots,
-      textGroups: const <PlateTextGroup>[
-        PlateTextGroup(<int>[0], key: 'number'),
-        PlateTextGroup(<int>[1], key: 'series'),
-        PlateTextGroup(<int>[2], key: 'area'),
-      ],
+      textGroups: PlateTextGroup.perSlot(<String>['number', 'series', 'area']),
       resolveRegion: RepublicOfTheCongoRegions.captionOf,
       decals: const <PlateDecal>[_emblem],
       labels: const <PlateLabel>[
